@@ -1,0 +1,17 @@
+1) cout<<a; ---> galat hai bhai
+
+2) DataTypes ---> 3 types ---> i) Built in/primitive ---> int, floating , void
+                               ii) Derived ---> array ,pointers , references
+                               iii)user defined ---> structures ,unions , classes
+
+3) sizeof(int) ---> depends on machine ---> 32 bit machine mein 4 bytes
+
+4) int a = 5; ---> assignment
+
+   if(a==b)  ---> relational 
+
+5) sendd array to function ---> void(int arr[],int target) ---> pass by references ---> changes the actual array
+
+6) XOR operator ---> cancels out same elements ---> int ans = 3^3 = 1 
+
+
