@@ -1,18 +1,16 @@
 /*
-partition ka sum maximum should be minimum ,,, define search space ---> 0 to end(sum of all elements) ,,, count ko 1 se start ,,, sum=nums[i]
-
-basically ulta chalta hai ye ,,, "ans ye hai ki nhi"
+minimum time from partition ---> similar to book allocation
 */
 
-int solve(vector<int>&nums,int x,int mid){
+int solve(vector<int>&nums,int x,int currsum){
     int n=nums.size();
     int count=1;
     int sum=0;
     for(int i=0;i<n;i++){
-        if(nums[i]>mid){
+        if(nums[i]>currsum){
             return false;
         }
-        if(sum+nums[i] > mid){
+        if(sum+nums[i]>currsum){
             c++;
             sum=nums[i];
             if(c>x){
@@ -47,6 +45,6 @@ int binary(vector<int>&nums,int x){
             s=mid+1;
         }
         mid=s+(e-s)/2;
-    }
+    }   
     return ans;
 }
