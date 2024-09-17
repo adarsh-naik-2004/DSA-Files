@@ -4,7 +4,7 @@ partition ka sum maximum should be minimum ,,, define search space ---> 0 to end
 basically ulta chalta hai ye ,,, "ans ye hai ki nhi"
 */
 
-int solve(vector<int>&nums,int x,int mid){
+bool solve(vector<int>&nums,int x,int mid){
     int n=nums.size();
     int count=1;
     int sum=0;
