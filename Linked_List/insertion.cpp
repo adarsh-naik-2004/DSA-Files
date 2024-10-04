@@ -4,7 +4,7 @@ insert 3 types ---> 1) at head(first position)
                     3)at any position
 */
 
-void inserthead(Node* head, Node* tail,int data){
+void inserthead(Node* &head, Node* &tail,int data){
     // if LL is empty
     if(head==NULL){
         Node* newnode=new Node(data);
@@ -18,7 +18,7 @@ void inserthead(Node* head, Node* tail,int data){
     }
 }
 
-void inserttail(Node* head, Node* tail,int data){
+void inserttail(Node* &head, Node* &tail,int data){
     // if LL is empty
     if(head==NULL){
         Node* newnode=new Node(data);
@@ -42,7 +42,7 @@ int findlength(Node* head){
     return c;
 }
 
-void insertposition(Node* head,Node* tail,int data,int position){
+void insertposition(Node* &head,Node* &tail,int data,int position){
     if(head==NULL){
         Node* newnode=new Node(data);
         head=newnode;

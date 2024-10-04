@@ -1,5 +1,5 @@
 /*
-data structure hota hai ,,, non-continous memory location ,,,no memory wastage 
+data structure hota hai ,,, non-continous memory location ,,, no memory wastage 
 
 runtime pe dynamically grow/shrink
 
@@ -20,7 +20,7 @@ class Node{
     }
 };
 
-void print(Node* head){
+void print(Node* &head){
     Node* temp=head;
     while(temp!=NULL){
         cout<<temp->data<<" ";
@@ -28,7 +28,7 @@ void print(Node* head){
     }
 }
 
-int findlength(Node* head){
+int findlength(Node* &head){
     Node* temp=head;
     int c=0;
     while(temp!=NULL){

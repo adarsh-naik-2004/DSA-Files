@@ -19,7 +19,7 @@ class Node{
     }
 };
 
-void inserthead(Node* head,Node* tail,int data){
+void inserthead(Node* &head,Node* &tail,int data){
     if(head==NULL){
         Node* newnode=new Node(data);
         head=newnode;
@@ -33,7 +33,7 @@ void inserthead(Node* head,Node* tail,int data){
     }
 }
 
-void inserttail(Node* head, Node* tail,int data){
+void inserttail(Node* &head, Node* &tail,int data){
     // if LL is empty
     if(head==NULL){
         Node* newnode=new Node(data);
@@ -48,7 +48,7 @@ void inserttail(Node* head, Node* tail,int data){
     }
 }
 
-void insertposition(Node* head,Node* tail,int data,int position){
+void insertposition(Node* &head,Node* &tail,int data,int position){
     if(head==NULL){
         Node* newnode=new Node(data);
         head=newnode;
@@ -84,7 +84,7 @@ void insertposition(Node* head,Node* tail,int data,int position){
     newnode->prev=prevnode;
 }
 
-void deleteposition(Node* head,Node* tail,int position){
+void deleteposition(Node* &head,Node* &tail,int position){
     if(head==NULL){
         cout<<"Linked List is empty";
         return;

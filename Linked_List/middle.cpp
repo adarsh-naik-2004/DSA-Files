@@ -2,7 +2,7 @@
  
  */
  
- Node* getmiddle(Node* head){
+ Node* getmiddle(Node* &head){
     if(head==NULL){
         cout<<"LL is Empty";
         return head;
@@ -15,7 +15,7 @@
 
     while(slow!=NULL && fast!=NULL){
         fast=fast->next;
-        if(fats!=NULL){
+        if(fast!=NULL){
             fast=fast->next;
             slow=slow->next;
         }

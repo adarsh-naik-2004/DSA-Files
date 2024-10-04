@@ -2,7 +2,7 @@
 curr --> head ,,, prev ---> NULL ,,, in int main()
 */
 
-Node* reverse(Node* prev,Node* curr){
+Node* reverse(Node* &prev,Node* &curr){
     if(curr==NULL){
         return prev;
     }
@@ -14,12 +14,11 @@ Node* reverse(Node* prev,Node* curr){
 }
 
 /*
- iteratively ---> simple loop
+ iteratively ---> simple loop ,,,,, return prev
 */
-ListNode* reverseok(ListNode* head){
+ListNode* reverseok(ListNode* &head){
     ListNode* curr=head;
     ListNode* prev=NULL;
-
     while(curr!=NULL){
     ListNode* temp=curr->next;
     curr->next=prev;
