@@ -1,14 +1,4 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+// 1st approach 2 recurison wala O(N2)
 class Solution {
 public:
 
@@ -28,12 +18,43 @@ public:
         }
         int left=height(root->left);
         int right=height(root->right);
-        if(abs(left-right)>1){
-            return false;
-        }
-        if(isBalanced(root->right) && isBalanced(root->left)){
+        if(isBalanced(root->right) && isBalanced(root->left) && abs(left-right)<=1){
             return true;
         }
         return false;
+    }
+};
+
+// 2nd approach with pair removing height call and in O(N)
+
+class Solution {
+public:
+
+    pair<bool,int> fast(TreeNode* root){
+        if(root==NULL){
+            pair<bool,int> p=make_pair(true,0);
+            return p;
+        }
+        pair<bool,int>left=fast(root->left);
+        pair<bool,int>right=fast(root->right);
+
+        int leftheight=left.second;
+        int rightheight=right.second;
+
+        pair<bool,int> ans;
+        if(left.first && right.first && abs(leftheight-rightheight)<=1){
+            ans.first=true;
+            ans.second=max(leftheight,rightheight)+1;
+        }
+        else{
+            ans.first=false;
+            ans.second=max(leftheight,rightheight)+1;
+        }
+        
+        return ans;
+    }
+
+    bool isBalanced(TreeNode* root) {
+        return fast(root).first;
     }
 };
