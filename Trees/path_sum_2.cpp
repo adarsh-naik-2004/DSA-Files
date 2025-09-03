@@ -15,31 +15,26 @@ public:
         if(root==NULL){
             return;
         }
+        path.push_back(root->val);
+        total += root->val;
+
         if(root->left==NULL && root->right==NULL){
-            path.push_back(root->val);
-            total+=root->val;
             if(total==targetSum) {
                 ans.push_back(path);
             }
-            path.pop_back();
-            total-=root->val;
-            return;
         }
-        
-        path.push_back(root->val);
-        total+=root->val;
-
-        solve(root->left,targetSum,total,path,ans);
-        solve(root->right,targetSum,total,path,ans);
-
+        else{
+            solve(root->left,targetSum,total,path,ans);
+            solve(root->right,targetSum,total,path,ans);
+        }
         path.pop_back();
         total-=root->val;
     }
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
         vector<vector<int>> ans;
+        vector<int> path;
         int total=0;
-        vector<int> temp;
-        solve(root,targetSum,total,temp,ans);
+        solve(root,targetSum,total,path,ans);
         return ans;
     }
 };
