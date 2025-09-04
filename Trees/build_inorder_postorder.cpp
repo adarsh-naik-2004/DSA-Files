@@ -1,51 +1,31 @@
-#include <iostream>
-#include<queue>
-#include<unordered_map>
-using namespace std;
+// right first then left ,, and using map instead of searching everytime
 
-class Node{
-        public:
-        int data;
-        Node* left;
-        Node* right;
+class Solution {
+public:
 
-        Node(int data) {
-                this->data = data;
-                this->left = NULL;     
-                this->right = NULL;  
+    TreeNode* solve(vector<int>& inorder, vector<int>& postorder, unordered_map<int,int>&inorderindex,int &postorderstart,int inorderstart, int inorderend){
+        if(postorderstart<0 || inorderstart > inorderend){
+            return NULL;
         }
-};
-
-int findPosition(int arr[], int n, int element) {
-        for(int i=0; i<n; i++) {
-                if(arr[i] == element) {
-                        return i;
-                }
-        }
-        return -1;
-}
-
-Node* buildTreeFromPostOrderInOrder(int inorder[], int postorder[], int &postIndex, int size, 
-int inorderStart, int inorderEnd, unordered_map<int,int> &mapping) {
-        //basecase
-        if(postIndex < 0 || inorderStart > inorderEnd) {
-                return NULL;
-        }
-
-        //A
-        int element = postorder[postIndex--];
-   
-        Node* root = new Node(element);
-
-       // int pos = findPosition(inorder,size, element);
-        int pos = mapping[element];
-        //root->right solve
-        root->right = buildTreeFromPostOrderInOrder(inorder, postorder, postIndex, size, pos+1, inorderEnd, mapping);
-
-        //root->left solve
-        root->left = buildTreeFromPostOrderInOrder(inorder, postorder, postIndex, size, inorderStart, pos-1, mapping);
-
+        int element=postorder[postorderstart--];
+            
+        TreeNode* root=new TreeNode(element);
+            
+        int pos=inorderindex[element];
+            
+        root->right=solve(inorder,postorder,inorderindex,postorderstart,pos+1,inorderend);
+        root->left=solve(inorder,postorder,inorderindex,postorderstart,inorderstart,pos-1);
+            
         return root;
+    }
 
-
-}
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        unordered_map<int,int> inorderindex;
+        for(int i=0;i<inorder.size();i++){
+            inorderindex[inorder[i]]=i;
+        }
+        int postorderstart=postorder.size()-1;
+        int inorderend=inorder.size()-1;
+        return solve(inorder,postorder,inorderindex,postorderstart,0,inorderend);
+    }
+};
