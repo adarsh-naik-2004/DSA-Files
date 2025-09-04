@@ -4,18 +4,19 @@ same as same tree ,, bs right ka left and left ka right
 
 class Solution {
 public:
-    bool ismirror(TreeNode* p, TreeNode* q) {
-        if(!p && !q){
+    bool solve(TreeNode* p, TreeNode* q) {
+        if(p==NULL && q==NULL){
             return true;
         }
-        if(p && q){
-            if((p->val==q->val) && (ismirror(p->left,q->right)) && (ismirror(p->right,q->left))){
-                return true;
-            }
+        if((p!=NULL && q==NULL) || (p==NULL && q!=NULL)){
+            return false;
+        }
+        if(solve(p->left,q->right) && solve(p->right,q->left) && p->val==q->val){
+            return true;
         }
         return false;
     }
     bool isSymmetric(TreeNode* root) {
-        return ismirror(root->left,root->right);
+        return solve(root->left,root->right);
     }
 };
