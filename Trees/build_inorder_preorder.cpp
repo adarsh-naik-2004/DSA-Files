@@ -1,50 +1,26 @@
-/*
-preorder ka first ---> root ,, check that node in inorder ,, than its left is left node of root and right wala part is right side of root
-*/
+// // left first then right(preorder-> N L R) ,, and using map instead of searching everytime ,, preorderstart isko by reference lena change ho raha hai
+class Solution {
+public:
 
-#include <iostream>
-#include<queue>
-#include<unordered_map>
-using namespace std;
-
-class Node{
-        public:
-        int data;
-        Node* left;
-        Node* right;
-
-        Node(int data) {
-                this->data = data;
-                this->left = NULL;     
-                this->right = NULL;  
+    TreeNode* solve(vector<int>& preorder, vector<int>& inorder, unordered_map<int,int>& inorderindex,int &preorderstart,int inorderstart, int inorderend){
+        if(preorderstart>=preorder.size() || inorderstart > inorderend){
+            return NULL;
         }
-};
-
-int findPosition(int arr[], int n, int element) {
-        for(int i=0; i<n; i++) {
-                if(arr[i] == element) {
-                        return i;
-                }
-        }
-        return -1;
-}
-
-Node* buildTreeFromPreOrderInOrder(int inorder[], int preorder[], int size, int &preIndex, int inorderStart, int inorderEnd) {
-
-        //base case
-        if(preIndex >= size || inorderStart > inorderEnd) {
-                return NULL;
-        }
-
-        //Step A:
-        int element = preorder[preIndex++];
-        Node* root = new Node(element);
-        int pos = findPosition(inorder, size, element);
-
-        //step B: root->left solve
-        root->left = buildTreeFromPreOrderInOrder(inorder, preorder, size, preIndex, inorderStart, pos-1);
-        //Step C: root->right solve
-        root->right = buildTreeFromPreOrderInOrder(inorder, preorder, size, preIndex, pos+1, inorderEnd);
-
+        int element=preorder[preorderstart++];
+        TreeNode* root = new TreeNode(element);
+        int pos=inorderindex[element];
+        root->left=solve(preorder,inorder,inorderindex,preorderstart,inorderstart,pos-1);
+        root->right=solve(preorder,inorder,inorderindex,preorderstart,pos+1,inorderend);
         return root;
-} 
+    }
+
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        unordered_map<int,int> inorderindex;
+        for(int i=0;i<inorder.size();i++){
+            inorderindex[inorder[i]]=i;
+        }
+        int inorderend=inorder.size()-1;
+        int preorderstart=0;
+        return solve(preorder,inorder,inorderindex,preorderstart,0,inorderend);
+    }
+};
